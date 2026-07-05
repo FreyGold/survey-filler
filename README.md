@@ -14,7 +14,7 @@ This Chrome extension automates the tedious process of filling out surveys on th
 1. **Download or Clone the Repository**
    If you haven't already, clone this repository to your local machine:
    ```bash
-   git clone <repository-url>
+   git clone [<repository-url>](https://github.com/FreyGold/survey-filler.git)
    ```
 
 2. **Open Chrome Extensions Page**
