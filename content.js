@@ -66,13 +66,25 @@ async function autoFillAllTabs(strategy) {
     // Wait for questions to load (fast polling)
     let checks = 0;
     let activeContent = null;
+    let noSurvey = false;
     while (checks < 20) { // Max 3 seconds
         await sleep(150);
         activeContent = getActiveTabContent();
-        if (activeContent && activeContent.querySelectorAll('input[type="radio"]').length > 0) {
-            break;
+        if (activeContent) {
+            if (activeContent.querySelectorAll('input[type="radio"]').length > 0) {
+                break;
+            }
+            if (activeContent.innerText && activeContent.innerText.includes('لا يوجد استبيان')) {
+                noSurvey = true;
+                break;
+            }
         }
         checks++;
+    }
+    
+    if (noSurvey) {
+        console.log("Tab " + (i+1) + " has no survey (لا يوجد استبيان). Skipping.");
+        continue;
     }
     
     await sleep(150); // Tiny rendering buffer
